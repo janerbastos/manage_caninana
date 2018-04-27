@@ -1,0 +1,57 @@
+{% extends 'manage/index.html' %}
+{% load bootstrap manage_tags %}
+
+{% block content %}
+    {% if form %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <input type="submit" value="Gravar" class="btn btn-primary" />
+        <a href="/manage_main/" class="btn btn-danger">Cancelar</a>
+    </form>
+    {% else %}
+    <h2 class="text-warning">{{object.titulo}}</h2>
+    <p>URL do Evento: <strong>{{object.url|upper}}</strong></p>
+    <div class="media">
+        <ul class="media-list">
+            <li class="media">
+                {% if object.logo %}
+                <div class="media-left">
+                    <img class="media-object thumbnail" src="{{object.logo.url}}" alt="{{object.descricao}}" width="200">
+                </div>
+                {% endif %}
+                <div class="media-body">
+                    <h4 class="media-heading">Descrição do evento:</h4>
+                    {{object.descricao}}
+                </div>
+            </li>
+        </ul>
+    </div>
+    <hr>
+
+    <div class="media">
+        <ul class="media-list">
+            <li class="media">
+                <div class="media-body">
+                    <h4 class="media-heading">Outras informações:</h4>
+                    <p>Fluxo de trabalho: <strong>{{object.fluxo_trabalho|title}}</strong> : <strong>{% if object.publicacao_at %}em {{object.publicacao_at}}{% else %}Aguardando a primeira publicação{% endif %}</strong></p>
+                    <p>Data de criação: <strong>{{object.criacao_at}}</strong></p>
+                    <p>Data de abertura: <strong>{{object.inicio_at}}</strong></p>
+                    <p>Data de encerramento: <strong>{{object.encerramento_at}}</strong></p>
+                    {% has_membros evento=object as membros %}
+                    <p><strong>Membros do evento</strong></p>
+                    {% if membros %}
+                        <ul>
+                        {% for membro in membros %}
+                            <li>{{membro.user.get_full_name}} - {{membro.grupo|title}}</li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Nenhum membro vinculado ao evento.</p>
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+{% endblock content %}

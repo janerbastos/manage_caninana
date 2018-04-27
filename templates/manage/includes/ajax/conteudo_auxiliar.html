@@ -1,0 +1,17 @@
+
+{% if opcao == 'desvincular-usuario' %}
+    <ul>
+        {% if objects %}
+            {% for object in objects%}
+                <li><input type="checkbox" name="user_sites" value="{{object.id}}" class="user_site">&nbsp;{{object.evento.titulo}}</li>
+            {% endfor %}
+        {% else %}
+            <li>Nenhum site encontrado, vinculado ao usuário.</li>
+        {% endif %}
+    </ul>
+{% endif %}
+
+{% if opcao == 'reset-pessaword' %}
+    {% load bootstrap %}
+    {{ form|bootstrap }}
+{% endif %}

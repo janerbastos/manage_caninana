@@ -1,0 +1,29 @@
+{% load bootstrap manage_tags %}
+
+<!-- Modal Conforma Excluir registr -->
+<div class="modal fade" id="vincular_usuario_site" tabindex="-1" data-backdrop="static" >
+	<div class="modal-dialog">
+		<form action="" method="POST" >
+			{% csrf_token %}
+			<input type="hidden" name="_next" value="{{ request.path }}"/>
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Vincular usuários ao site</h4>
+				</div>
+
+				<div class="modal-body">
+					<span>Usuário:</span>
+					<h4></h4><br/>
+					{% has_form form='vincular' as form %}
+					{{form|bootstrap}}
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

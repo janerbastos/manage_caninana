@@ -1,0 +1,25 @@
+<!-- Modal Conforma Excluir registr -->
+<div class="modal fade" id="form_modal_comum" tabindex="-1" data-backdrop="static" >
+	<div class="modal-dialog">
+		<form action="" method="POST" >
+			{% csrf_token %}
+			<input type="hidden" name="_next" value=""/>
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Ttitulo do Form Modal</h4>
+				</div>
+
+				<div class="modal-body">
+					<h4>Título</h4><br/>
+					<p>Conteúdo principal do Form</p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal" id="id_cancelar">Cancelar</button>
+					<button type="submit" class="btn btn-primary" id="id_confirmar">Confirmar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

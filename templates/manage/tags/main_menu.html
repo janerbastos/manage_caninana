@@ -1,0 +1,26 @@
+<!-- Static navbar -->
+
+<li class="{% if view == 'novo_evento' %}active{% endif %}"><a href="?action=new">Novo Evento</a></li>
+<li class="{% if view == 'usuarios' %}active{% endif %}"><a href="/manage_main/?view=usuarios">Usuários</a></li>
+{% if evento %}
+<li class="dropdown {% if view == 'eventos' %}active{% endif %}">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{evento.url|upper}} <span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    {% if action == 'view' %}
+    {% if evento.fluxo_trabalho == 'privado' %}
+    <li><a href="{{evento.workflow}}">Publicar evento</a></li>
+    {% else %}
+    <li><a href="{{evento.workflow}}">Retirar evento</a></li>
+    {% endif %}
+    <li><a href="{{evento.edit_evento}}">Editar</a></li>
+    {% else %}
+    <li><a href="{{evento.view_evento}}">Visão</a></li>
+    {% endif %}
+    <li><a href="/{{evento.url}}/">Ir para o site</a></li>
+    <li role="separator" class="divider"></li>
+    <li class="dropdown-header">Nav header</li>
+    <li><a href="#">Separated link</a></li>
+    <li><a href="{% url 'manage_event:action' %}">Fechar</a></li>
+  </ul>
+</li>
+{% endif %}
